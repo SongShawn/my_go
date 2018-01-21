@@ -1,1 +1,1 @@
-## It is used to generate many string with items
+## 练习GO语言使用
