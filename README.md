@@ -1,0 +1,1 @@
+## It is used to generate many string with items
