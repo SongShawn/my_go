@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"stringfactory"
+	"mygo/stringfactory"
 )
 
 func main() {
