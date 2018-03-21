@@ -1,12 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
-	"regexp"
 )
 
 func main() {
@@ -26,15 +24,9 @@ func main() {
 		os.Exit(5)
 	}
 
-	// <a href="https://sobooks.cc/go.html?url=https://pan.baidu.com/s/1NbTLo9YBuLYrUpKrJUyLxw" target="_blank" rel="nofollow">百度网盘</a>
+	ioutil.WriteFile("8132.html", data, 0666)
 
-	baiduUrlRe, err := regexp.Compile(`<a href="https://sobooks.cc/go.html?.*百度网盘<\/a>`)
-	if err != nil {
-		os.Exit(7)
-	}
+	// <a href="https://sobooks.cc/go.html?url=
+	// https://pan.baidu.com/s/1NbTLo9YBuLYrUpKrJUyLxw" target="_blank" rel="nofollow">百度网盘</a>
 
-	for _, v := range baiduUrlRe.FindAllSubmatchIndex(data, -1) {
-		fmt.Println(v)
-		fmt.Println(string(data[v[0]:v[1]]))
-	}
 }
