@@ -8,7 +8,64 @@ import (
 
 func main() {
 	//hexEncode()
-	useRegexpPkt()
+	//useRegexpPkt()
+	//useMap()
+	userInherit()
+}
+
+// 继承
+
+type AAA struct {
+}
+
+type AAAer interface {
+	func1111()
+}
+
+func (x *AAA) func1111() {
+	fmt.Println("AAA")
+}
+
+type BBB struct {
+	AAA
+	a int
+}
+
+func (x *BBB) func1111() {
+	fmt.Println("BBB")
+}
+
+func Inherittest(in AAAer) {
+	in2 := in.(*AAA)
+	in2.func1111()
+}
+
+func userInherit() {
+	a := &BBB{}
+	Inherittest(a)
+}
+
+func useMap() {
+
+	a := make(map[int]*int)
+	var b = 10
+	a[10] = &b
+
+	c := a[10]
+	if c == nil {
+		fmt.Println("is nil")
+	} else {
+		fmt.Println("not nil")
+	}
+
+	c = a[20]
+	if c == nil {
+		fmt.Println("is nil")
+	} else {
+		fmt.Println("not nil")
+	}
+
+	fmt.Println(len(a))
 }
 
 func hexEncode() {
