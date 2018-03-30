@@ -10,7 +10,30 @@ func main() {
 	//hexEncode()
 	//useRegexpPkt()
 	//useMap()
-	userInherit()
+	//userInherit()
+	//useTypeAssert()
+	useSlice()
+}
+
+func useSlice() {
+	var a []int
+
+	a = append(a, 10)
+	fmt.Println(a)
+}
+
+func useTypeAssert() {
+	a := &AAA{}
+
+	var b interface{}
+	b = a
+
+	c, ok := b.(*AAA)
+	fmt.Println(c, ok)
+
+	d, ok := b.(*BBB)
+	fmt.Println(d, ok)
+
 }
 
 // 继承
