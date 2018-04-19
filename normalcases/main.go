@@ -12,7 +12,8 @@ func main() {
 	//useMap()
 	//userInherit()
 	//useTypeAssert()
-	useSlice()
+	//useSlice()
+	useMap()
 }
 
 func useSlice() {
@@ -70,6 +71,7 @@ func userInherit() {
 
 func useMap() {
 
+	fmt.Println("case 1")
 	a := make(map[int]*int)
 	var b = 10
 	a[10] = &b
@@ -89,6 +91,16 @@ func useMap() {
 	}
 
 	fmt.Println(len(a))
+
+	fmt.Println("case 2")
+	aa := make(map[string]int)
+	aa["a"] = 10
+	aa["b"] = 11
+	aa["c"] = 12
+
+	for key := range aa {
+		fmt.Println(key)
+	}
 }
 
 func hexEncode() {
