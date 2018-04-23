@@ -1,8 +1,14 @@
 package main
 
 import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/base64"
 	"encoding/hex"
+	"encoding/pem"
 	"fmt"
+	"io/ioutil"
 	"regexp"
 )
 
@@ -13,7 +19,65 @@ func main() {
 	//userInherit()
 	//useTypeAssert()
 	//useSlice()
-	useMap()
+	//useMap()
+	useRSACrypt()
+}
+
+func getRSASize(key *rsa.PublicKey) int {
+	return (key.N.BitLen() + 7) / 8
+}
+
+func RsaEncrypt(pubKey *rsa.PublicKey, originData []byte) (cipherData []byte, err error) {
+	return nil, nil
+}
+
+func useRSACrypt() {
+	publicKeyFile := "c:/users/duoyi/rsa_sxn_public_key.pem"
+	privateKeyFile := "c:/users/duoyi/rsa_sxn_private_key.pem"
+
+	originData := "宋潇宁"
+
+	pubKeyBuf, err := ioutil.ReadFile(publicKeyFile)
+	if err != nil {
+		panic("read public key file failed.")
+	}
+
+	pubKeyBlock, _ := pem.Decode(pubKeyBuf)
+	pubIntf, err := x509.ParsePKIXPublicKey(pubKeyBlock.Bytes)
+	if err != nil {
+		panic("x509 parsePKIXPublickKey failed.")
+	}
+
+	priKeyBuf, err := ioutil.ReadFile(privateKeyFile)
+	if err != nil {
+		panic("read private key file failed.")
+	}
+	priKeyBlock, _ := pem.Decode(priKeyBuf)
+	priKey, err := x509.ParsePKCS1PrivateKey(priKeyBlock.Bytes)
+	if err != nil {
+		panic("x509 parsePKIXPub")
+	}
+
+	pubKey := pubIntf.(*rsa.PublicKey)
+	//priKey := priIntf.(*rsa.PrivateKey)
+
+	afterEnc, err := rsa.EncryptPKCS1v15(rand.Reader, pubKey, []byte(originData))
+	base64.StdEncoding.EncodeToString(afterEnc)
+	fmt.Printf("msg after encrypted : %s\n", base64.StdEncoding.EncodeToString(afterEnc))
+
+	afterDec, err := rsa.DecryptPKCS1v15(rand.Reader, priKey, afterEnc)
+	fmt.Printf("msg after decrypted : %s\n", string(afterDec))
+
+	fmt.Printf("bitlen:%d\n", pubKey.N.BitLen())
+}
+
+//func testPkgDependCycle() {
+//	xx := apkg.APKG11{}
+//	fmt.Println(xx)
+//}
+
+func useStringByte() {
+
 }
 
 func useSlice() {
