@@ -9,7 +9,12 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
+	"mygo/util"
+	"os"
 	"regexp"
+
+	"github.com/daviddengcn/go-colortext"
+	"github.com/daviddengcn/go-colortext/fmt"
 )
 
 func main() {
@@ -20,7 +25,15 @@ func main() {
 	//useTypeAssert()
 	//useSlice()
 	//useMap()
-	useRSACrypt()
+	//useRSACrypt()
+
+	util.Error("sdfafsaff")
+	util.Info("dafadfafa")
+	util.Trace("adfdafadfaasfa")
+
+	fmt.Printf("ppid : %d\n", os.Getppid())
+
+	ctfmt.Printf(ct.Red, true, "%s\n", "sdfadfasf")
 }
 
 func getRSASize(key *rsa.PublicKey) int {
@@ -85,6 +98,9 @@ func useSlice() {
 
 	a = append(a, 10)
 	fmt.Println(a)
+	//
+	//b := append(b, 100)
+	//fmt.Println(b)
 }
 
 func useTypeAssert() {
