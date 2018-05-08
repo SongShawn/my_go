@@ -21,12 +21,46 @@ func main() {
 	//hexEncode()
 	//useRegexpPkt()
 	//useMap()
-	//userInherit()
+	//testInherit()
 	//useTypeAssert()
 	//useSlice()
 	//useMap()
 	//useRSACrypt()
+	//printColorFul()
+	utf8convert()
+}
 
+func utf8convert() {
+	//a := "仿真"
+	//
+	//for i, j := range []byte(a) {
+	//	fmt.Printf("i=%d c=%x\n", i, j)
+	//}
+	//
+	//for _, j := range []byte(a) {
+	//	fmt.Printf("%x", j)
+	//}
+	//fmt.Println()
+	//
+	//fmt.Println(utf8.RuneCountInString(a))
+	//fmt.Println(len(a))
+	//
+	//buf := []byte{228, 184, 150} // 世
+	//fmt.Println(utf8.FullRune(buf))
+	//fmt.Println(utf8.FullRune(buf[:2]))
+
+	ascii2hex := map[uint8]int{
+		'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+		'a': 0xa, 'b': 0xb, 'c': 0xc, 'd': 0xd, 'e': 0xe, 'f': 0xf,
+	}
+
+	a := "e4bbbfe79c9f"
+	b, _ := hex.DecodeString(a)
+	fmt.Println(string(b))
+	fmt.Printf("%x\n", ascii2hex[a[0]]<<4|ascii2hex[a[1]])
+}
+
+func printColorFul() {
 	util.Error("sdfafsaff")
 	util.Info("dafadfafa")
 	util.Trace("adfdafadfaasfa")
@@ -98,6 +132,10 @@ func useSlice() {
 
 	a = append(a, 10)
 	fmt.Println(a)
+
+	xx := &AAA{}
+	xx.aaa = append(xx.aaa, 10)
+	fmt.Println(xx)
 	//
 	//b := append(b, 100)
 	//fmt.Println(b)
@@ -120,6 +158,7 @@ func useTypeAssert() {
 // 继承
 
 type AAA struct {
+	aaa []int
 }
 
 type AAAer interface {
@@ -135,6 +174,10 @@ type BBB struct {
 	a int
 }
 
+type CCC struct {
+	AAA
+}
+
 func (x *BBB) func1111() {
 	fmt.Println("BBB")
 }
@@ -144,9 +187,16 @@ func Inherittest(in AAAer) {
 	in2.func1111()
 }
 
-func userInherit() {
-	a := &BBB{}
-	Inherittest(a)
+func testInherit() {
+	var a AAAer
+	a = &BBB{}
+	a.func1111()
+
+	var b AAAer
+	b = &CCC{}
+	b.func1111()
+
+	//Inherittest(a)
 }
 
 func useMap() {
